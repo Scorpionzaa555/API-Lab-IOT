@@ -24,7 +24,7 @@ class Student(Base):
 
 class Menu(Base):
     __tablename__ = 'menus'
-
+    
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
     quantity = Column(Integer, index=True)
