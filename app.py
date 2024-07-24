@@ -93,6 +93,44 @@ async def delete_student(id: int, db: Session = Depends(get_db)):
     db.commit()
     return "Delete successfully!!!"
 
+##########################################
+
+@router_v1.get('/menus')
+async def get_menus(db: Session = Depends(get_db)):
+    return db.query(models.Menu).all()
+
+@router_v1.get('/menus/{menu_id}')
+async def get_menus(id: int, db: Session = Depends(get_db)):
+    return db.query(models.Menu).filter(models.Menu.id == id).first()
+
+@router_v1.post('/menus')
+async def create_menu(menu: dict, response: Response, db: Session = Depends(get_db)):
+    # TODO: Add validation
+    newmenu = models.Menu(id=menu['id'], name=menu['name'], quantity=menu['quantity'], note=menu['note'], price=menu['price'], detail=menu['detail'])
+    db.add(newmenu)
+    db.commit()
+    db.refresh(newmenu)
+    response.status_code = 201
+    return newmenu
+
+@router_v1.patch('/menus/{menu_id}')
+# app.include_router(router_v1)
+async def update_menu(id: int, menu: dict, db: Session = Depends(get_db)):
+    db_item = db.query(models.Student).filter(models.Student.id == id).first()
+    for key, value in menu.items():
+            setattr(db_item, key, value)
+    db.commit()
+    db.refresh(db_item)
+    # response.status_code = 201
+    return db_item
+
+@router_v1.delete('/menus/{menu_id}')
+async def delete_menu(id: int, db: Session = Depends(get_db)):
+    db_item = db.query(models.Menu).filter(models.Menu.id == id).first()
+    db.delete(db_item)
+    db.commit()
+    return "Delete successfully!!!"
+
 app.include_router(router_v1)
 
 if __name__ == '__main__':
