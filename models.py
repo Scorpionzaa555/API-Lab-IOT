@@ -35,3 +35,12 @@ class Menu(Base):
     note = Column(String, index=True)
     price = Column(Integer, index=True)
     detail = Column(String, index=True)
+    
+class Order(Base):
+    __tablename__ = 'orders'
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, index=True)
+    quantity = Column(Integer, index=True)
+    note = Column(String, index=True)
+    price = Column(Integer, index=True)
