@@ -73,7 +73,7 @@ async def get_students(db: Session = Depends(get_db)):
     return db.query(models.Student).all()
 
 @router_v1.get('/students/{student_id}')
-async def get_student(stu_id: int, db: Session = Depends(get_db)):
+async def get_students(stu_id: int, db: Session = Depends(get_db)):
     return db.query(models.Student).filter(models.Student.id == stu_id).first()
 
 @router_v1.post('/students')

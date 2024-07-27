@@ -1,4 +1,4 @@
-from sqlalchemy import CHAR, Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 # from sqlalchemy.orm import relationship
 
 from database import Base
@@ -19,10 +19,11 @@ class Student(Base):
     __tablename__ = 'students'
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(CHAR, index=True)
-    surname = Column(CHAR, index=True)
-    bod = Column(CHAR, index=True)
-    sex = Column(CHAR, index=True)
+    stu_id = Column(Integer, index=True)
+    name = Column(String, index=True)
+    surname = Column(String, index=True)
+    bod = Column(String, index=True)
+    sex = Column(String, index=True)
     age = Column(Integer, index=True)
 
 class Menu(Base):
